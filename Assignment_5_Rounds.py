@@ -10,11 +10,13 @@ import math
 class BasicMathOperations:
     def greet_user(self,firstname, lastname):
         print(f"Hello {firstname} {lastname}")
+        
     def add_numbers(self):
         first_num = int(input("First number: "))
         second_num = int(input("Second number: "))
         sum = first_num + second_num
         return sum
+    
     def perform_opperations(self,num1,num2,operator):
         if operator == '+':
             return num1+num2
@@ -24,19 +26,39 @@ class BasicMathOperations:
             return num1 / num2
         else:
             return num1 * num2
+    
     def square_number(self,num):
         return num ** 2
+    
     def factorial(self, num):
         total = 1
         for i in range(1, num+1):
             total = i * total
         return total
+    
     def counting(self,start,end):
         for i in range(start,end + 1):
             print(f"{i}")
+    
     def compute_hypo(self,a,b):
         return math.sqrt(a ** 2+ b ** 2)
-
     
-testerman = BasicMathOperations()
-print(testerman.compute_hypo(5,3))
+    def calculate_square(self,num):
+        return num ** 2
+    
+    def calculateHypotenus(self,a,b):
+        a_square = self.calculate_square(a)
+        b_square = self.calculate_square(b)
+        return math.sqrt(a_square + b_square)
+    
+    def rect_area(self,width, height):
+        return width * height
+    
+    def pow_num(self,base,exp):
+        return base ** exp
+    
+    def arg_type(self,arg):
+        return type(arg)
+
+
+
