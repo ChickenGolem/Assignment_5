@@ -62,7 +62,6 @@ class BasicMathOperations:
         return type(arg)
     #13
     def number_to_method(self,user_task):
-        #1 2 3 12
         tasks_with_two_ints = {
             3: self.perform_opperations,
             6: self.counting,
@@ -80,7 +79,7 @@ class BasicMathOperations:
             self.greet_user(first, last)
         
         elif user_task == 2:
-            self.add_numbers()
+            print(self.add_numbers())
         
         elif user_task == 12:
             uinput = input("Enter data")
@@ -106,23 +105,31 @@ class BasicMathOperations:
        
 
 vary = BasicMathOperations()
+is_valid = False
+print("""Tasks accomplished by this program, please enter a number corresponding to the task you want accomplished
+1)Greet User
+2)Sum Numbers
+3)Perform a specified operation on unser-inputted numbers
+4)Square user inputted number
+5)Find the facotrial of a user inputted number
+6)Count from a user provided start to a user prvided end
+7)Find the hypotonuse of a right triangle, the user inputs its side lengths
+8)Squares user inputted number
+9)Find the hypotonuse of a right triangle, the user inputs its side lengths
+10) find the area of a rectangle
+11)raises a user inputed number to a user inputted power
+12)returns the type of variable the user inputs""")
+while is_valid == False:
+    try:
+        user_choice = int(input("Please pick a number:"))
+        if user_choice not in range(1,13):
+            raise Exception("Not in range")
+    except:
+        print("Input must be an integer between 1-12!")
+    else:
+        is_valid = True
+        
 
-user_choice = int(input("""Tasks accomplished by this program, please enter a number corresponding to the task you want accomplished
-    1)Greet User
-    2)Sum Numbers
-    3)Perform a specified operation on unser-inputted numbers
-    4)Square user inputted number
-    5)Find the facotrial of a user inputted number
-    6)Count from a user provided start to a user prvided end
-    7)Find the hypotonuse of a right triangle, the user inputs its side lengths
-    8)Squares user inputted number
-    9)Find the hypotonuse of a right triangle, the user inputs its side lengths
-    10) find the area of a rectangle
-    11)raises a user inputed number to a user inputted power
-    12)returns the type of variable the user inputs
-    
-    Please pick a number:"""))
-    
 vary.number_to_method(user_choice)
 
     
