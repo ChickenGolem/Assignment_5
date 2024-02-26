@@ -13,8 +13,15 @@ class BasicMathOperations:
         print(f"Hello {firstname} {lastname}")
     #2  
     def add_numbers(self):
-        first_num = int(input("First number: "))
-        second_num = int(input("Second number: "))
+        is_int = False
+        while is_int == False:
+            try:
+                first_num = int(input("First number: "))
+                second_num = int(input("Second number: "))
+            except:
+                print("both inputs must be integers!")
+            else:
+                is_int = True
         sum = first_num + second_num
         return sum
     #3
@@ -62,6 +69,8 @@ class BasicMathOperations:
         return type(arg)
     #13
     def number_to_method(self,user_task):
+        is_int = False
+        
         tasks_with_two_ints = {
             3: self.perform_opperations,
             6: self.counting,
@@ -74,6 +83,7 @@ class BasicMathOperations:
             5: self.factorial,
             8: self.calculate_square}
         if user_task == 1:
+            #Because this is just a normal input no error handling is needed, if the user enters '1' it will simply be treated as a string
             first = input("Enter first name: ")
             last = input("Enter last name: ")
             self.greet_user(first, last)
@@ -82,30 +92,56 @@ class BasicMathOperations:
             print(self.add_numbers())
         
         elif user_task == 12:
-            uinput = input("Enter data")
+            #Again this is always a string, which does rather make the method useless, but this is what was requested to be made
+            uinput = input("Enter data ")
             print(self.arg_type(uinput))
             
+            
         elif user_task in tasks_with_two_ints:
-            int1 = int(input("Enter the first int: "))
-            int2 = int(input("Enter the second int: "))
+            while is_int == False:
+                #Error handling for int1 and int 2
+                try:
+                    int1 = int(input("Enter the first int: "))
+                    int2 = int(input("Enter the second int: "))
+                except:
+                    print("both inputs must be integers!")
+                else:
+                    is_int = True
+                    
             #3 requires a special if statement because it has an additional argument
             if user_task == 3:
-                op = input("enter +, -, * or /")
-                tasks_with_two_ints[user_task](int1,int2,op)
+                is_op = False
+                while is_op == False:
+                    try:
+                        op = input("enter +, -, * or /")
+                        if op != '+' and op != '-' and op != '*' and op != '/':
+                            raise
+                    except:
+                        print("Please enter either +, -, * or /!")
+                    else:
+                        is_op = True
+                print(tasks_with_two_ints[user_task](int1,int2,op))
             #this exception for 6 is neccessary because 6 does not have a return statement
-            if user_task == 6:
+            elif user_task == 6:
                 tasks_with_two_ints[user_task](int1,int2)
             else:
                 print(tasks_with_two_ints[user_task](int1,int2))
         elif user_task in tasks_with_one_int:
-            int1 = int(input("Enter the int: "))
+            while is_int == False:
+                #Error handling for int1 and int 2
+                try:
+                    int1 = int(input("Enter the first int: "))
+                except:
+                    print("input must be an integer!")
+                else:
+                    is_int = True
             #all one int methods have a return statement
             print(tasks_with_one_int[user_task](int1))
         
-       
 
 vary = BasicMathOperations()
 is_valid = False
+
 print("""Tasks accomplished by this program, please enter a number corresponding to the task you want accomplished
 1)Greet User
 2)Sum Numbers
@@ -129,7 +165,6 @@ while is_valid == False:
     else:
         is_valid = True
         
-
 vary.number_to_method(user_choice)
 
     
