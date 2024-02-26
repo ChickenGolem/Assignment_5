@@ -8,15 +8,16 @@ import math
 
 
 class BasicMathOperations:
+    #1
     def greet_user(self,firstname, lastname):
         print(f"Hello {firstname} {lastname}")
-        
+    #2  
     def add_numbers(self):
         first_num = int(input("First number: "))
         second_num = int(input("Second number: "))
         sum = first_num + second_num
         return sum
-    
+    #3
     def perform_opperations(self,num1,num2,operator):
         if operator == '+':
             return num1+num2
@@ -26,67 +27,87 @@ class BasicMathOperations:
             return num1 / num2
         else:
             return num1 * num2
-    
+    #4
     def square_number(self,num):
         return num ** 2
-    
+    #5
     def factorial(self, num):
         total = 1
         for i in range(1, num+1):
             total = i * total
         return total
-    
+    #6
     def counting(self,start,end):
         for i in range(start,end + 1):
             print(f"{i}")
-    
+    #7
     def compute_hypo(self,a,b):
         return math.sqrt(a ** 2+ b ** 2)
-    
+    #8
     def calculate_square(self,num):
         return num ** 2
-    
+    #9
     def calculateHypotenus(self,a,b):
         a_square = self.calculate_square(a)
         b_square = self.calculate_square(b)
         return math.sqrt(a_square + b_square)
-    
+    #10
     def rect_area(self,width, height):
         return width * height
-    
+    #11
     def pow_num(self,base,exp):
         return base ** exp
-    
+    #12
     def arg_type(self,arg):
         return type(arg)
-    
+    #13
+    def number_to_method(self,user_task):
+        #1 2 3 12
+        tasks_with_two_ints = {
+            3: self.perform_opperations,
+            6: self.counting,
+            7: self.compute_hypo,
+            9: self.calculateHypotenus,
+            10: self.rect_area,
+            11: self.pow_num}
+        tasks_with_one_int = {
+            4: self.square_number,
+            5: self.factorial,
+            8: self.calculate_square}
+        if user_task == 1:
+            first = input("Enter first name: ")
+            last = input("Enter last name: ")
+            self.greet_user(first, last)
+        
+        elif user_task == 2:
+            self.add_numbers()
+        
+        elif user_task == 12:
+            uinput = input("Enter data")
+            print(self.arg_type(uinput))
+            
+        elif user_task in tasks_with_two_ints:
+            int1 = int(input("Enter the first int: "))
+            int2 = int(input("Enter the second int: "))
+            #3 requires a special if statement because it has an additional argument
+            if user_task == 3:
+                op = input("enter +, -, * or /")
+                tasks_with_two_ints[user_task](int1,int2,op)
+            #this exception for 6 is neccessary because 6 does not have a return statement
+            if user_task == 6:
+                tasks_with_two_ints[user_task](int1,int2)
+            else:
+                print(tasks_with_two_ints[user_task](int1,int2))
+        elif user_task in tasks_with_one_int:
+            int1 = int(input("Enter the int: "))
+            #all one int methods have a return statement
+            print(tasks_with_one_int[user_task](int1))
+        
+       
 
-    """
-
-Question 3: Write a function that takes three arguments num1, num2 & operator & compute
-the desired operation. Return and show the desired result in your screen.
-Question 4. Write a function that squares its argument.
-Question 5. Write a function that computes factorial of a number.
-Question 6. Write a function that take start and end number as inputs & display counting in
-your screen.
-Question 7. Write a function that computes hypotenuse of a right angle triangle by following
-the steps given below.
-Hypotenuse2 = Base2 + Perpendicular2
-a) Take base and perpendicular as inputs.
-b) Create a function calculateSquare() for calculating and returning square of a
-number.
-c) Create a function calculateHypotenuse() for calculating hypotenuse of a right
-angle triangle. Make use of the calculateSquare() function.
-Question 8. Write a function that calculates the area of a rectangle. A = width * height
-Pass width and height in following manner:
-a) Arguments as values
-b) Arguments as variables
-Question 9. Write a function that computes power of a number. E.g. 23 is 8.
-Question 10. Write a function which accepts an argument and returns the typ
-"""
-    
 vary = BasicMathOperations()
-print("""Tasks accomplished by this program, please enter a number corresponding to the task you want accomplished
+
+user_choice = int(input("""Tasks accomplished by this program, please enter a number corresponding to the task you want accomplished
     1)Greet User
     2)Sum Numbers
     3)Perform a specified operation on unser-inputted numbers
@@ -96,16 +117,15 @@ print("""Tasks accomplished by this program, please enter a number corresponding
     7)Find the hypotonuse of a right triangle, the user inputs its side lengths
     8)Squares user inputted number
     9)Find the hypotonuse of a right triangle, the user inputs its side lengths
-    10)raises a user inputed number to a user inputted power
-    11)returns the type of variable the user inputs""")
+    10) find the area of a rectangle
+    11)raises a user inputed number to a user inputted power
+    12)returns the type of variable the user inputs
     
+    Please pick a number:"""))
+    
+vary.number_to_method(user_choice)
 
-"""Display a list of all the questions/tasks to the user.
-• Prompt the user to pick a number corresponding to the task they want to execute.
-• Based on the user's choice, call the respective method from the BasicMathOperations class to
-perform the operation.
-• Ensure the program can handle invalid selections and prompt the user again."""
-
+    
 
 
 
